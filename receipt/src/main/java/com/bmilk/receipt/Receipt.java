@@ -1,13 +1,13 @@
-package com.bmilk.apapp;
+package com.bmilk.receipt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+@EnableEurekaClient
 @SpringBootApplication
-public class ApAppApplication {
-
+public class Receipt {
     public static void main(String[] args) {
-        SpringApplication.run(ApAppApplication.class, args);
+        SpringApplication.run(Receipt.class, args);
     }
-
 }

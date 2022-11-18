@@ -1,0 +1,22 @@
+CREATE TABLE `rec_payment_order` (
+     `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+     `create_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+     `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'SYS' COMMENT '创建人',
+     `update_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
+     `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'SYS' COMMENT '最后一次更新人',
+     `version` tinyint(4) unsigned zerofill NOT NULL DEFAULT '0000' COMMENT '版本号',
+     `idem_id` bigint NOT NULL COMMENT '幂等表Id',
+     `transaction_amount` decimal(19,4) NOT NULL COMMENT '交易金额',
+     `transaction_date` datetime DEFAULT NULL COMMENT '交易时间',
+     `order_status` varchar(32) NOT NULL COMMENT '订单状态',
+     `success_amount` decimal(19,4) DEFAULT NULL COMMENT '成功金额',
+     `request_no` varchar(32) NOT NULL COMMENT '请求流水号',
+     `merchant_no` varchar(32) NOT NULL COMMENT '商户号',
+     `finish_time` datetime DEFAULT NULL COMMENT '订单完成时间',
+     `pay_account_no` varchar(128) NOT NULL COMMENT '付款账户',
+     `next_retry_time` datetime NOT NULL COMMENT '下一次重试时间',
+     `payment_channel` varchar(64) NOT NULL COMMENT '支付渠道',
+     PRIMARY KEY (`id`),
+     UNIQUE KEY `UK_REC_PAY_REQUEST_NO` (`request_no`) USING BTREE,
+     KEY `IDX_REC_PAY_CREATE_TIME` (`create_at`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
