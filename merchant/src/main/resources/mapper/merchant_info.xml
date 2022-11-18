@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bmilk.merchant.dao.MerchantInfoDao">
+    <resultMap id="MerchantInfo" type="com.bmilk.merchant.entry.MerchantInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="update_at" property="updateAt" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="idem_id" property="idemId" jdbcType="BIGINT"/>
+        <result column="merchant_no" property="merchantNo" jdbcType="VARCHAR"/>
+        <result column="mobile_no" property="mobileNo" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="VARCHAR"/>
+        <result column="is_real_name" property="isRealName" jdbcType="TIMESTAMP"/>
+        <result column="registry_time" property="registryTime" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <sql id="all_column">
+        id,
+        create_at,
+        create_by,
+        update_at,
+        update_by,
+        version,
+        idem_id,
+        merchant_no,
+        mobile_no,
+        is_valid,
+        is_real_name,
+        registry_time,
+        remark
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="MerchantInfo">
+        insert into
+            merchant_info(
+                create_at,
+                create_by,
+                update_at,
+                update_by,
+                version,
+                idem_id,
+                merchant_no,
+                mobile_no,
+                is_valid,
+                is_real_name,
+                registry_time,
+                remark)
+        values (
+           now(),
+           'SYS',
+           now(),
+           'SYS',
+           0,
+           #{idemId},
+           #{merchantNo},
+           #{merchantNo},
+           #{isValid},
+           #{isRealName},
+           now(),
+           #{remark}
+        )
+    </insert>
+
+    <select id="queryByMerchantNo" parameterType="java.lang.String" resultMap="MerchantInfo">
+        select
+        <include refid="all_column"/>
+        from
+        merchant_info
+        where merchant_no = #{merchantNo}
+    </select>
+
+
+
+
+</mapper>
