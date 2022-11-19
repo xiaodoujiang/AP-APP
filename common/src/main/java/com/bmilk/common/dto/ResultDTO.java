@@ -15,6 +15,8 @@ public class ResultDTO<T> implements Serializable {
 
     private T data;
 
+    public ResultDTO() {
+    }
 
     public ResultDTO(Result result) {
         this(result, null);

@@ -8,6 +8,7 @@ import com.bmilk.merchant.service.MerchantInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -19,9 +20,13 @@ public class MerchantInfoResource {
     @Autowired
     private MerchantInfoService merchantInfoService;
 
+    @Value("${server.port}")
+    private String port;
+
     @GetMapping("/info")
     public ResultDTO<MerchantInfoDTO> queryByMerchantNo(
             @RequestParam(value = "merchantNo", required = false) String merchantNo){
+        log.info("server port,{}",port);
         log.info("queryByMerchantNo start, merchantNo:[{}]", merchantNo);
 
         String errMsg = queryByMerchantNoParamCheck(merchantNo);
