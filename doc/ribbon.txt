@@ -1,0 +1,13 @@
+ribbon工作过程:
+第一步：选择eurekaServer，它优先选择在同一个区域内负载较少的server
+第二步：再根绝用户指定的策略，再从server取到的服务注册列表中选择一个地址
+
+ribbon负载均衡算法：
+-RoundRobinRule：默认轮询的方式
+-RandomRule：随机
+-WeightResponseTimeRule：根据响应时间来分配权重的方式，响应的越快，分配的值越大。
+-BestAvailableRule：选择并发量最小的方式
+-RetryRule：在一个配置时间段内当选择server不成功，则一直尝试使用subRule的方式选择一个可用的server
+-ZoneAvoidanceRule：根据性能和可用性来选择。
+-AvailabilityFilteringRule：先功率掉故障实例，在选择并发较小的实例
+
